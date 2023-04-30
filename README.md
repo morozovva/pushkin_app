@@ -100,3 +100,8 @@
 При выборе пользователем одного из экспонатов, доступна карточка с более подробной информацией об экспонате, такой как описание экспоната, а также аудиогид по нему. При нажатии кнопки Play (номер 1) запускается воспроизведение аудиогида, при повторном нажатии - воспроизведение останавливается.
 
 <img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/item_screen.png" width=30% height=30%>
+
+## Кастомизация
+В приложении так же реализована темная тема, которая автоматически включается исходя из системных настроек пользователя.
+
+<img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/signup.png" width=30% height=30%><img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/catalog_screen.png" width=30% height=30%><img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/exh_list.png" width=30% height=30%><img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/exh_screen.png" width=30% height=30%>
