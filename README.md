@@ -104,4 +104,6 @@
 ## Кастомизация
 В приложении так же реализована темная тема, которая автоматически включается исходя из системных настроек пользователя.
 
-<img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/signup.png" width=30% height=30%><img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/catalog_screen.png" width=30% height=30%><img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/exh_list.png" width=30% height=30%><img src="https://github.com/morozovva/pushkin_app/blob/bea12044e724f2f4305cc492082e151e9cac3679/screenshots/screenshots-dark/exh_screen.png" width=30% height=30%>
+
+
+<img src="screenshots/screenshots-dark/signup.png" width=25% height=25%><img src="screenshots/screenshots-dark/catalog_screen.png" width=25% height=25%><img src="screenshots/screenshots-dark/exh_list.png" width=25% height=25%><img src="screenshots/screenshots-dark/exh_screen.png" width=25% height=25%>
