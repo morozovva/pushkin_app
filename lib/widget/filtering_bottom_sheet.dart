@@ -31,7 +31,7 @@ class _FilteringBottomSheetState extends State<FilteringBottomSheet> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 23,
             ),
             Text(
@@ -41,11 +41,11 @@ class _FilteringBottomSheetState extends State<FilteringBottomSheet> {
                   .titleSmall!
                   .copyWith(fontWeight: FontWeight.w600),
             ),
-            FilterTile(type: FilterType.cheap),
+            const FilterTile(type: FilterType.cheap),
             Divider(color: Theme.of(context).primaryColor, thickness: 1),
-            FilterTile(type: FilterType.mid),
+            const FilterTile(type: FilterType.mid),
             Divider(color: Theme.of(context).primaryColor, thickness: 1),
-            FilterTile(type: FilterType.exp),
+            const FilterTile(type: FilterType.exp),
             Divider(color: Theme.of(context).primaryColor, thickness: 1),
           ],
         ),

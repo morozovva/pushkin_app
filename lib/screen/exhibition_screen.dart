@@ -16,19 +16,21 @@ class ExhibitionScreen extends StatelessWidget {
         .getExhibition(exhibitionID);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
-      floatingActionButton: CircularBackButton(),
+      floatingActionButton: const CircularBackButton(),
       body: Column(children: [
-        Container(
+        SizedBox(
           height: 230,
           child: Image.network(
             exhibition.imageUrl,
             fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
           ),
         ),
         Container(
           width: double.infinity,
           color: Theme.of(context).colorScheme.secondary,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -39,11 +41,11 @@ class ExhibitionScreen extends StatelessWidget {
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Text(
-                exhibition.time + ", " + exhibition.date,
+                "${exhibition.time}, ${exhibition.date}",
                 style: Theme.of(context).textTheme.bodySmall,
                 softWrap: true,
                 maxLines: 5,
@@ -61,7 +63,7 @@ class ExhibitionScreen extends StatelessWidget {
                   children: [
                     Container(
                       height: 56,
-                      margin: EdgeInsets.only(bottom: 13),
+                      margin: const EdgeInsets.only(bottom: 13),
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -76,8 +78,8 @@ class ExhibitionScreen extends StatelessWidget {
                               "Экспонаты",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
-                            Spacer(),
-                            Icon(
+                            const Spacer(),
+                            const Icon(
                               Icons.arrow_forward,
                               color: Colors.black,
                             )
@@ -90,7 +92,7 @@ class ExhibitionScreen extends StatelessWidget {
                             .textTheme
                             .headlineSmall!
                             .copyWith(fontWeight: FontWeight.w500)),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
                     Text(

@@ -38,22 +38,22 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   audioplayers: ^4.0.1
-  # another_flutter_splash_screen: ^1.1.4
   geolocator: ^9.0.2
   yandex_mapkit: ^3.2.0
   mobile_scanner: ^3.2.0
   shared_preferences: ^2.1.0
   flutter_native_splash: ^2.2.19
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_native_splash:
-  image: assets/SplashScreen-light.png
-  color: "#FFFFFF"
-  color_dark: "#111314"
-  image_dark: assets/SplashScreen.png
+# flutter_native_splash:
+#   image: assets/SplashScreen-light.png
+#   color: "#FFFFFF"
+#   color_dark: "#111314"
+#   image_dark: assets/SplashScreen.png
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -77,7 +77,7 @@ flutter:
   assets:
     # - assets/MuseumLogo.png
     # - assets/MuseumLogo-dark.png
-    - assets/SplashScreen-light.png
+    # - assets/SplashScreen-light.png
     - assets/SplashScreen.png
   #   - images/a_dot_ham.jpeg
 

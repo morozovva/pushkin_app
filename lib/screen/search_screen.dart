@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 });
               },
               controller: editingController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Поиск",
                   hintText: "Найти",
                   prefixIcon: Icon(Icons.search),
@@ -44,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Expanded(
               child: Padding(
-                  padding: EdgeInsets.only(top: 13),
+                  padding: const EdgeInsets.only(top: 13),
                   child: ListView.builder(
                     padding: const EdgeInsets.all(0),
                     itemCount: museumsData.length,

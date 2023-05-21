@@ -8,7 +8,7 @@ class CircularBackButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () => Navigator.pop(context),
       backgroundColor: Colors.white,
-      child: Icon(
+      child: const Icon(
         Icons.arrow_back,
         color: Colors.black,
       ),

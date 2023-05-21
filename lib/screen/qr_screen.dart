@@ -78,7 +78,7 @@ class _QRScreenState extends State<QRScreen> {
 
         showDialog(
             context: context,
-            builder: (context) => AlertDialog(
+            builder: (context) => const AlertDialog(
                   title: Text("Неверный QR-код"),
                   content: Text(
                       "Попробуйте отсканировать другой или выберите экспонат из списка"),

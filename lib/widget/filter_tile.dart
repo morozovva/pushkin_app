@@ -38,7 +38,6 @@ class _FilterTileState extends State<FilterTile> {
               .titleSmall!
               .copyWith(fontWeight: FontWeight.w600),
         ),
-        // trailing: ,
       ),
     );
   }

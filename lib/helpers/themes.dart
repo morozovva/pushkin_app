@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pushkin_app/helpers/colors.dart';
 
 class Themes {
-  static var _appBarTheme = AppBarTheme().copyWith(
+  static final _appBarTheme = const AppBarTheme().copyWith(
     backgroundColor: ThemeColors.lightBlue,
     titleTextStyle: const TextStyle(
       //headline 6
@@ -99,7 +99,7 @@ class Themes {
         bodySmall: bodySmallTheme,
         titleMedium: TextStyle(color: Colors.white)),
     appBarTheme: _appBarTheme,
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       prefixIconColor: Colors.white,
       labelStyle: TextStyle(color: Colors.white),
       hintStyle: TextStyle(color: Colors.white),
@@ -110,7 +110,7 @@ class Themes {
         borderSide: BorderSide(color: Colors.white),
       ),
     ),
-    bottomSheetTheme: BottomSheetThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.black,
     ),
     checkboxTheme: CheckboxThemeData(

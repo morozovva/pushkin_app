@@ -7,6 +7,8 @@ import 'search_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = "tabs-screen";
+
+  const TabsScreen({super.key});
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }

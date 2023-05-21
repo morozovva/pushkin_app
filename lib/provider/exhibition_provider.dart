@@ -37,8 +37,8 @@ class ExhibitionProvider with ChangeNotifier {
       });
       _exhibitions = loadedExhibitions;
       notifyListeners();
-    } on Exception catch (e) {
-      throw e;
+    } on Exception {
+      rethrow;
     }
   }
 }

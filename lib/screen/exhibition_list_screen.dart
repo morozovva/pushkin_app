@@ -37,17 +37,17 @@ class _ExhibitionListScreenState extends State<ExhibitionListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Выставки",
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(24, 30, 24, 24),
         child: _isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ExhibitionGrid(),
+            : const ExhibitionGrid(),
       ),
     );
   }

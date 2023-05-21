@@ -16,19 +16,36 @@ class ItemScreen extends StatelessWidget {
         Provider.of<ItemProvider>(context, listen: false).getItem(itemID)!;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
-      floatingActionButton: CircularBackButton(),
+      floatingActionButton: const CircularBackButton(),
       body: Column(children: [
-        Container(
+        SizedBox(
           height: 250,
           child: Image.network(
             item.imageUrl,
             fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              return child;
+            },
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              } else {
+                return const SizedBox(
+                  height: 250,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+            },
           ),
         ),
         Container(
           width: double.infinity,
           color: Theme.of(context).colorScheme.secondary,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,7 +59,7 @@ class ItemScreen extends StatelessWidget {
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
             ],
@@ -55,11 +72,11 @@ class ItemScreen extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    myAudioPlayer(url: item.track),
-                    SizedBox(
+                    MyAudioPlayer(url: item.track),
+                    const SizedBox(
                       height: 8,
                     ),
                     Text("Описание экспоната",
@@ -67,7 +84,7 @@ class ItemScreen extends StatelessWidget {
                             .textTheme
                             .headlineSmall!
                             .copyWith(fontWeight: FontWeight.w500)),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
                     Text(

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../helpers/colors.dart';
 
-class myAudioPlayer extends StatefulWidget {
-  const myAudioPlayer({super.key, required this.url});
+class MyAudioPlayer extends StatefulWidget {
+  const MyAudioPlayer({super.key, required this.url});
 
   final String url;
 
   @override
-  State<myAudioPlayer> createState() => _myAudioPlayerState();
+  State<MyAudioPlayer> createState() => _MyAudioPlayerState();
 }
 
-class _myAudioPlayerState extends State<myAudioPlayer> {
+class _MyAudioPlayerState extends State<MyAudioPlayer> {
   String _printDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, "0");
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
@@ -90,7 +90,6 @@ class _myAudioPlayerState extends State<myAudioPlayer> {
               onChanged: (val) async {
                 final position = Duration(seconds: val.toInt());
                 await audioPlayer.seek(position);
-
                 await audioPlayer.resume();
               },
             ),

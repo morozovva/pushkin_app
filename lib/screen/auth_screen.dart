@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import '../model/http_exception.dart';
 import '../provider/auth_provider.dart';
 
-enum AuthMode { Signup, Login }
+enum AuthMode { signup, login }
 
 class AuthScreen extends StatefulWidget {
   static const routeName = '/auth';
+
+  const AuthScreen({super.key});
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
@@ -16,8 +18,8 @@ class _AuthScreenState extends State<AuthScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   GlobalKey mailKey = GlobalKey();
   GlobalKey passKey = GlobalKey();
-  AuthMode _authMode = AuthMode.Login;
-  Map<String, String> _authData = {
+  AuthMode _authMode = AuthMode.login;
+  final Map<String, String> _authData = {
     'email': '',
     'password': '',
   };
@@ -41,7 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("Ошибка входа"),
+              title: const Text("Ошибка входа"),
               content: Text(message),
             ));
   }
@@ -57,7 +59,7 @@ class _AuthScreenState extends State<AuthScreen> {
       _isLoading = true;
     });
     try {
-      if (_authMode == AuthMode.Login) {
+      if (_authMode == AuthMode.login) {
         // Log user in
         await Provider.of<Auth>(context, listen: false).login(
             _authData["email"] as String, _authData["password"] as String);
@@ -84,13 +86,13 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _switchAuthMode() {
-    if (_authMode == AuthMode.Login) {
+    if (_authMode == AuthMode.login) {
       setState(() {
-        _authMode = AuthMode.Signup;
+        _authMode = AuthMode.signup;
       });
     } else {
       setState(() {
-        _authMode = AuthMode.Login;
+        _authMode = AuthMode.login;
       });
     }
   }
@@ -98,16 +100,16 @@ class _AuthScreenState extends State<AuthScreen> {
   List<Widget> buildTextInputs() {
     return [
       TextFormField(
-        enabled: _authMode == AuthMode.Signup,
-        decoration: InputDecoration(labelText: 'Фамилия'),
+        enabled: _authMode == AuthMode.signup,
+        decoration: const InputDecoration(labelText: 'Фамилия'),
       ),
       TextFormField(
-        enabled: _authMode == AuthMode.Signup,
-        decoration: InputDecoration(labelText: 'Имя'),
+        enabled: _authMode == AuthMode.signup,
+        decoration: const InputDecoration(labelText: 'Имя'),
       ),
       TextFormField(
-        enabled: _authMode == AuthMode.Signup,
-        decoration: InputDecoration(labelText: 'Номер телефона'),
+        enabled: _authMode == AuthMode.signup,
+        decoration: const InputDecoration(labelText: 'Номер телефона'),
       ),
     ];
   }
@@ -126,9 +128,10 @@ class _AuthScreenState extends State<AuthScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              if (_authMode == AuthMode.Signup) ...buildTextInputs(),
+              if (_authMode == AuthMode.signup) ...buildTextInputs(),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Электронная почта'),
+                decoration:
+                    const InputDecoration(labelText: 'Электронная почта'),
                 keyboardType: TextInputType.emailAddress,
                 autofocus: false,
                 key: mailKey,
@@ -147,7 +150,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 decoration: InputDecoration(
                     labelText: 'Пароль',
                     suffixIcon: Padding(
-                        padding: EdgeInsets.only(top: 15.0),
+                        padding: const EdgeInsets.only(top: 15.0),
                         child: IconButton(
                           icon: Icon(_obscureText
                               ? Icons.visibility_off
@@ -167,15 +170,15 @@ class _AuthScreenState extends State<AuthScreen> {
                   _authData['password'] = value!;
                 },
               ),
-              if (_authMode == AuthMode.Signup)
+              if (_authMode == AuthMode.signup)
                 TextFormField(
                   obscuringCharacter: "*",
-                  enabled: _authMode == AuthMode.Signup,
-                  decoration: InputDecoration(
+                  enabled: _authMode == AuthMode.signup,
+                  decoration: const InputDecoration(
                     labelText: 'Повторите пароль',
                   ),
                   obscureText: true,
-                  validator: _authMode == AuthMode.Signup
+                  validator: _authMode == AuthMode.signup
                       ? (value) {
                           if (value != _passwordController.text) {
                             return 'Пароли не совпадают!';
@@ -184,22 +187,22 @@ class _AuthScreenState extends State<AuthScreen> {
                         }
                       : null,
                 ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               if (_isLoading)
-                CircularProgressIndicator()
+                const CircularProgressIndicator()
               else
-                Container(
+                SizedBox(
                   height: 50,
                   width: MediaQuery.of(context).size.width - 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
+                      shape: const StadiumBorder(),
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                     ),
                     child: Text(
-                      _authMode == AuthMode.Login
+                      _authMode == AuthMode.login
                           ? 'Войти'
                           : 'Зарегистрироваться',
                       style: Theme.of(context)
@@ -213,12 +216,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               TextButton(
+                onPressed: _switchAuthMode,
                 child: Text(
-                  '${_authMode == AuthMode.Login ? 'Зарегистрироваться' : 'Войти'}',
+                  _authMode == AuthMode.login ? 'Зарегистрироваться' : 'Войти',
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                onPressed: _switchAuthMode,
               ),
             ],
           ),

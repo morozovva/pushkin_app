@@ -16,19 +16,21 @@ class MuseumScreen extends StatelessWidget {
         Provider.of<MuseumProvider>(context, listen: false).getMuseum(museumID);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
-      floatingActionButton: CircularBackButton(),
+      floatingActionButton: const CircularBackButton(),
       body: Column(children: [
-        Container(
+        SizedBox(
           height: 250,
           child: Image.network(
             museum.imageUrl,
             fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
           ),
         ),
         Container(
           height: 73,
           color: Theme.of(context).colorScheme.secondary,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Row(children: [
             CircleAvatar(
               backgroundColor: Colors.white,
@@ -37,7 +39,7 @@ class MuseumScreen extends StatelessWidget {
                 museum.logo,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Text(
@@ -55,7 +57,7 @@ class MuseumScreen extends StatelessWidget {
                   children: [
                     Container(
                       height: 56,
-                      margin: EdgeInsets.only(bottom: 13),
+                      margin: const EdgeInsets.only(bottom: 13),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
@@ -71,8 +73,8 @@ class MuseumScreen extends StatelessWidget {
                               "Выставки музея",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
-                            Spacer(),
-                            Icon(
+                            const Spacer(),
+                            const Icon(
                               Icons.arrow_forward,
                               color: Colors.black,
                             )
@@ -85,7 +87,7 @@ class MuseumScreen extends StatelessWidget {
                             .textTheme
                             .headlineSmall!
                             .copyWith(fontWeight: FontWeight.w500)),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
                     Text("Средняя стоимость билета – ${museum.price} рублей.",
@@ -93,7 +95,7 @@ class MuseumScreen extends StatelessWidget {
                             .textTheme
                             .headlineSmall!
                             .copyWith(fontWeight: FontWeight.w400)),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
                     Text(

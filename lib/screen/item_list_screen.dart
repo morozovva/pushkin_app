@@ -38,14 +38,14 @@ class _ItemListScreenState extends State<ItemListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Экспонаты",
         ),
         actions: [
           IconButton(
             onPressed: () =>
                 Navigator.of(context).pushNamed(QRScreen.routeName),
-            icon: Icon(
+            icon: const Icon(
               Icons.qr_code_2,
               size: 35,
             ),
@@ -55,10 +55,10 @@ class _ItemListScreenState extends State<ItemListScreen> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 18),
         child: _isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ItemGrid(),
+            : const ItemGrid(),
       ),
     );
   }

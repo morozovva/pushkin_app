@@ -29,7 +29,7 @@ class MuseumProvider with ChangeNotifier {
       final response = await http.get(Uri.parse(url));
       final extractedData = json.decode(response.body) as List<dynamic>;
       final List<Museum> loadedMuseums = [];
-      extractedData.forEach((museum) {
+      for (var museum in extractedData) {
         loadedMuseums.add(
           Museum(
             id: extractedData.indexOf(museum),
@@ -41,13 +41,13 @@ class MuseumProvider with ChangeNotifier {
             description: museum["description"],
           ),
         );
-      });
+      }
       _museums = loadedMuseums;
       _unfilteredMuseums = loadedMuseums;
 
       notifyListeners();
     } on Exception catch (e) {
-      throw e;
+      throw Exception('Ошибка загрузки данных');
     }
   }
 

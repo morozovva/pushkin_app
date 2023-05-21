@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/auth_provider.dart';
 import '../provider/museum_provider.dart';
 import 'museum_screen.dart';
 import '../widget/filtering_bottom_sheet.dart';
@@ -35,6 +34,17 @@ class _CatalogScreenState extends State<CatalogScreen> {
     _isInit = false;
   }
 
+  Future<void> _pullRefresh() async {
+    setState(() {
+      _isLoading = true;
+    });
+    Provider.of<MuseumProvider>(context, listen: false)
+        .fetchMuseums()
+        .then((_) => setState(() {
+              _isLoading = false;
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
@@ -61,7 +71,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           context: context,
                           builder: (_) {
                             return GestureDetector(
-                              child: SortingBottomSheet(),
+                              child: const SortingBottomSheet(),
                               onTap: () {},
                             );
                           });
@@ -77,7 +87,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       showModalBottomSheet(
                           context: context,
                           builder: (_) {
-                            return FilteringBottomSheet();
+                            return const FilteringBottomSheet();
                           });
                     },
                     icon: Icon(
@@ -86,39 +96,32 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ),
                     iconSize: 30,
                   ),
-                  // IconButton(
-                  //   onPressed: () {
-                  //     Provider.of<Auth>(context, listen: false).logout();
-                  //   },
-                  //   icon: Icon(
-                  //     Icons.exit_to_app,
-                  //     color: iconColor,
-                  //   ),
-                  //   iconSize: 30,
-                  // ),
                 ],
               )
             ],
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(top: 13),
-              child: _isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.all(0),
-                      itemCount: museumsData.length,
-                      itemBuilder: (context, index) => GestureDetector(
-                        onTap: () => Navigator.of(context).pushNamed(
-                            MuseumScreen.routeName,
-                            arguments: museumsData[index].id),
-                        child: MuseumItem(
-                          museumItem: museumsData[index],
+              padding: const EdgeInsets.only(top: 13),
+              child: RefreshIndicator(
+                onRefresh: _pullRefresh,
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        itemCount: museumsData.length,
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () => Navigator.of(context).pushNamed(
+                              MuseumScreen.routeName,
+                              arguments: museumsData[index].id),
+                          child: MuseumItem(
+                            museumItem: museumsData[index],
+                          ),
                         ),
                       ),
-                    ),
+              ),
             ),
           )
         ]),

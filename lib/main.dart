@@ -34,11 +34,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(new MyApp());
+    runApp(const MyApp());
   });
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -66,19 +68,19 @@ class MyApp extends StatelessWidget {
             darkTheme: Themes().darkTheme,
             theme: Themes().lightTheme,
             home: auth.isAuth
-                ? TabsScreen()
+                ? const TabsScreen()
                 : FutureBuilder(
                     future: auth.tryAutoLogin(),
-                    builder: (context, res) => AuthScreen(),
+                    builder: (context, res) => const AuthScreen(),
                   ),
             routes: {
-              MuseumScreen.routeName: (context) => MuseumScreen(),
+              MuseumScreen.routeName: (context) => const MuseumScreen(),
               ExhibitionListScreen.routeName: (context) =>
-                  ExhibitionListScreen(),
-              ExhibitionScreen.routeName: (context) => ExhibitionScreen(),
-              ItemListScreen.routeName: (context) => ItemListScreen(),
-              ItemScreen.routeName: (context) => ItemScreen(),
-              QRScreen.routeName: (context) => QRScreen(),
+                  const ExhibitionListScreen(),
+              ExhibitionScreen.routeName: (context) => const ExhibitionScreen(),
+              ItemListScreen.routeName: (context) => const ItemListScreen(),
+              ItemScreen.routeName: (context) => const ItemScreen(),
+              QRScreen.routeName: (context) => const QRScreen(),
             },
           ),
         ));

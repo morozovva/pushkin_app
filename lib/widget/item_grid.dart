@@ -14,40 +14,55 @@ class ItemGrid extends StatelessWidget {
       itemBuilder: (context, index) => GestureDetector(
         onTap: () => Navigator.of(context)
             .pushNamed(ItemScreen.routeName, arguments: items[index].id),
-        child: Container(
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Image.network(
-                      items[index].imageUrl,
-                      height: 56,
-                      width: 56,
-                      fit: BoxFit.cover,
-                    ),
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Image.network(
+                    items[index].imageUrl,
+                    height: 56,
+                    width: 56,
+                    fit: BoxFit.cover,
+                    frameBuilder:
+                        (context, child, frame, wasSynchronouslyLoaded) {
+                      return child;
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return const SizedBox(
+                          height: 56,
+                          width: 56,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    },
                   ),
-                  SizedBox(
-                    width: 16,
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 110,
+                  child: Text(
+                    items[index].title,
+                    softWrap: false,
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 120,
-                    child: Text(
-                      items[index].title,
-                      softWrap: false,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Divider(),
-          ]),
-        ),
+          ),
+          const Divider(),
+        ]),
       ),
       itemCount: items.length,
     );

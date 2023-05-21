@@ -20,7 +20,7 @@ class ExhibitionGrid extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
-          margin: EdgeInsets.only(bottom: 22),
+          margin: const EdgeInsets.only(bottom: 22),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,10 +34,26 @@ class ExhibitionGrid extends StatelessWidget {
                   height: 244,
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  frameBuilder:
+                      (context, child, frame, wasSynchronouslyLoaded) {
+                    return child;
+                  },
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return const SizedBox(
+                        height: 244,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(14),
+                padding: const EdgeInsets.all(14),
                 height: 72,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
