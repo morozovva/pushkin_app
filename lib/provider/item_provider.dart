@@ -37,8 +37,8 @@ class ItemProvider with ChangeNotifier {
       });
       _items = loadedItems;
       notifyListeners();
-    } on Exception catch (e) {
-      throw e;
+    } on Exception {
+      rethrow;
     }
   }
 }

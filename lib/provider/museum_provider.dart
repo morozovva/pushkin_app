@@ -46,8 +46,8 @@ class MuseumProvider with ChangeNotifier {
       _unfilteredMuseums = loadedMuseums;
 
       notifyListeners();
-    } on Exception catch (e) {
-      throw Exception('Ошибка загрузки данных');
+    } on Exception {
+      const Text('Ошибка загрузки данных');
     }
   }
 

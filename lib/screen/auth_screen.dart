@@ -43,7 +43,10 @@ class _AuthScreenState extends State<AuthScreen> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: const Text("Ошибка входа"),
+              title: Text(
+                "Ошибка входа",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
               content: Text(message),
             ));
   }
@@ -79,6 +82,8 @@ class _AuthScreenState extends State<AuthScreen> {
             "Неизвестная ошибка, попробуйте повторить запрос позднее";
       }
       _showErrorDialog(errorMessage);
+    } on Exception catch (_) {
+      _showErrorDialog("Проверьте подключение к интернету и повторите попытку");
     }
     setState(() {
       _isLoading = false;
@@ -129,46 +134,54 @@ class _AuthScreenState extends State<AuthScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               if (_authMode == AuthMode.signup) ...buildTextInputs(),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: 'Электронная почта'),
-                keyboardType: TextInputType.emailAddress,
-                autofocus: false,
-                key: mailKey,
-                validator: (value) {
-                  if (value!.isEmpty || !value.contains('@')) {
-                    return 'Неверная почта!';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _authData['email'] = value!;
-                },
-              ),
-              TextFormField(
-                obscuringCharacter: "*",
-                decoration: InputDecoration(
-                    labelText: 'Пароль',
-                    suffixIcon: Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: IconButton(
-                          icon: Icon(_obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility),
-                          onPressed: () => _toggleObscure(),
-                        ))),
-                obscureText: _obscureText,
-                key: passKey,
-                controller: _passwordController,
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 6) {
-                    return 'Пароль должен содержать не менее 6 символов';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _authData['password'] = value!;
-                },
+              AutofillGroup(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration:
+                          const InputDecoration(labelText: 'Электронная почта'),
+                      keyboardType: TextInputType.emailAddress,
+                      autofillHints: const [AutofillHints.email],
+                      autofocus: false,
+                      key: mailKey,
+                      validator: (value) {
+                        if (value!.isEmpty || !value.contains('@')) {
+                          return 'Неверная почта!';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _authData['email'] = value!;
+                      },
+                    ),
+                    TextFormField(
+                      obscuringCharacter: "*",
+                      decoration: InputDecoration(
+                          labelText: 'Пароль',
+                          suffixIcon: Padding(
+                              padding: const EdgeInsets.only(top: 15.0),
+                              child: IconButton(
+                                icon: Icon(_obscureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                                onPressed: () => _toggleObscure(),
+                              ))),
+                      obscureText: _obscureText,
+                      autofillHints: const [AutofillHints.password],
+                      key: passKey,
+                      controller: _passwordController,
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 6) {
+                          return 'Пароль должен содержать не менее 6 символов';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _authData['password'] = value!;
+                      },
+                    ),
+                  ],
+                ),
               ),
               if (_authMode == AuthMode.signup)
                 TextFormField(

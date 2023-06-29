@@ -38,7 +38,7 @@ class ExhibitionProvider with ChangeNotifier {
       _exhibitions = loadedExhibitions;
       notifyListeners();
     } on Exception {
-      rethrow;
+      const Text("no internet connection");
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pushkin_app/widget/internet_error.dart';
 
 import '../provider/museum_provider.dart';
 import 'museum_screen.dart';
@@ -22,14 +23,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-      Provider.of<MuseumProvider>(context)
-          .fetchMuseums()
-          .then((_) => setState(() {
-                _isLoading = false;
-              }));
+      _pullRefresh();
     }
     _isInit = false;
   }
@@ -109,18 +103,21 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : ListView.builder(
-                        padding: const EdgeInsets.all(0),
-                        itemCount: museumsData.length,
-                        itemBuilder: (context, index) => GestureDetector(
-                          onTap: () => Navigator.of(context).pushNamed(
-                              MuseumScreen.routeName,
-                              arguments: museumsData[index].id),
-                          child: MuseumItem(
-                            museumItem: museumsData[index],
+                    : museumsData.isEmpty
+                        ? const InternetError()
+                        : ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            padding: const EdgeInsets.all(0),
+                            itemCount: museumsData.length,
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                  MuseumScreen.routeName,
+                                  arguments: museumsData[index].id),
+                              child: MuseumItem(
+                                museumItem: museumsData[index],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
               ),
             ),
           )

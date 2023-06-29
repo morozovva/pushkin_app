@@ -20,17 +20,21 @@ class _ExhibitionListScreenState extends State<ExhibitionListScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-      final museumId = ModalRoute.of(context)?.settings.arguments as int;
-      Provider.of<ExhibitionProvider>(context)
-          .fetchExibitions(museumId)
-          .then((_) => setState(() {
-                _isLoading = false;
-              }));
+      _pullRefresh();
     }
     _isInit = false;
+  }
+
+  Future<void> _pullRefresh() async {
+    setState(() {
+      _isLoading = true;
+    });
+    final museumId = ModalRoute.of(context)?.settings.arguments as int;
+    Provider.of<ExhibitionProvider>(context)
+        .fetchExibitions(museumId)
+        .then((_) => setState(() {
+              _isLoading = false;
+            }));
   }
 
   @override
@@ -43,11 +47,14 @@ class _ExhibitionListScreenState extends State<ExhibitionListScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(24, 30, 24, 24),
-        child: _isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : const ExhibitionGrid(),
+        child: RefreshIndicator(
+          onRefresh: _pullRefresh,
+          child: _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : const ExhibitionGrid(),
+        ),
       ),
     );
   }

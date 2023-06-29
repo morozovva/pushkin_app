@@ -24,7 +24,7 @@ class Auth with ChangeNotifier {
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=[API_KEY]";
+        "https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyCSpiUt-Upl4Aq47X9XM6zcuWc-Jetp2eM";
 
     try {
       final response = await http.post(Uri.parse(url),
@@ -52,8 +52,8 @@ class Auth with ChangeNotifier {
       prefs.setString('token', _token);
       prefs.setString('userId', _userId);
       prefs.setString('expiryDate', _expiryDate.toIso8601String());
-    } on Exception catch (e) {
-      throw e;
+    } on Exception {
+      rethrow;
     }
   }
 
